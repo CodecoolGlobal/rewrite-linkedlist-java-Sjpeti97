@@ -1,14 +1,11 @@
 package com.codecool.linkedlist;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 public class SinglyLinkedList<T> {
 
     private int size;
-//    private T t;
-    private T[] myList;
+    private T[] myArray;
 
     private class Link {
 
@@ -36,7 +33,7 @@ public class SinglyLinkedList<T> {
 
     public SinglyLinkedList() {
         this.size = 0;
-        this.myList = (T[]) new Object[0];
+        this.myArray = (T[]) new Object[0];
     }
 
 
@@ -47,8 +44,8 @@ public class SinglyLinkedList<T> {
      * @param value value to be appended
      */
     public void add(T value) {
-        this.myList = Arrays.copyOf(myList, size+1);
-        this.myList[size]=value;
+        this.myArray = Arrays.copyOf(myArray, size+1);
+        this.myArray[size]=value;
         head = new Link(value);
         this.size+=1;
     }
@@ -60,7 +57,7 @@ public class SinglyLinkedList<T> {
      * @return value of element at index
      */
     public T get(int index) {
-//        return this.myList[index];
+        return this.myArray[index];
     }
 
     /**
@@ -80,6 +77,22 @@ public class SinglyLinkedList<T> {
      * @param number Value to be inserted.
      */
     public void insert(int index, T number) {
+        if (index>=size) {
+            add(number);
+        } else {
+            T[] copy = (T[]) new Object[size+1];
+            if (index==0) {
+                copy[0] = number;
+                System.arraycopy(myArray, 0, copy, 1, size);
+            } else {
+                System.arraycopy(myArray, 0, copy, 0, index);
+                copy[index]=number;
+                System.arraycopy(myArray, index, copy, index+1, size-1);
+            }
+            this.myArray=copy;
+            this.head = new Link(number);
+            this.size+=1;
+        }
     }
 
     /**
