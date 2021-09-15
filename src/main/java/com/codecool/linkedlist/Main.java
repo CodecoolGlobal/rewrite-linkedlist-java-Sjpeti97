@@ -13,7 +13,7 @@ public class Main {
         int numberOfElements = Integer.valueOf(args[0]);
         String command = args[1];
 
-        list = new SinglyLinkedList();
+        list = new SinglyLinkedList<Integer>();
         System.out.println("After you're done try these to get a feel for computational cost.");
 
         feedList(numberOfElements);
