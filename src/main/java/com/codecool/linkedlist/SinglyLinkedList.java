@@ -1,12 +1,13 @@
 package com.codecool.linkedlist;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class SinglyLinkedList<T> {
 
     private int size;
-    private T t;
+//    private T t;
     private T[] myList;
 
     private class Link {
@@ -34,7 +35,8 @@ public class SinglyLinkedList<T> {
     private Link head;
 
     public SinglyLinkedList() {
-        this.size=0;
+        this.size = 0;
+        this.myList = (T[]) new Object[0];
     }
 
 
@@ -45,6 +47,10 @@ public class SinglyLinkedList<T> {
      * @param value value to be appended
      */
     public void add(T value) {
+        this.myList = Arrays.copyOf(myList, size+1);
+        this.myList[size]=value;
+        head = new Link(value);
+        this.size+=1;
     }
 
     /**
@@ -53,8 +59,8 @@ public class SinglyLinkedList<T> {
      * @param index the position of requested value
      * @return value of element at index
      */
-    public int get(int index) {
-        return 0;
+    public T get(int index) {
+//        return this.myList[index];
     }
 
     /**
@@ -82,7 +88,7 @@ public class SinglyLinkedList<T> {
      * @return Size of list.
      */
     public int size() {
-        return 0;
+        return this.size;
     }
 
     /**
