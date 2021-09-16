@@ -163,4 +163,20 @@ public class SinglyLinkedList<T> {
         }
         elementBeforeIndex.setNext(elementAtIndex.getNext());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder listOfElements = new StringBuilder();
+        listOfElements.append("[");
+        Link nextLink = head;
+        for (int i = 0; i < size; i++) {
+            listOfElements.append(nextLink.getValue());
+            if (i!=size-1) {
+                listOfElements.append(",");
+            }
+            nextLink = nextLink.getNext();
+        }
+        listOfElements.append("]");
+        return listOfElements.toString();
+    }
 }
