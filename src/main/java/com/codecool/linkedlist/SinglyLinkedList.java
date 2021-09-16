@@ -1,15 +1,12 @@
 package com.codecool.linkedlist;
 
-import java.util.Arrays;
-
 public class SinglyLinkedList<T> {
 
     private int size;
-    private T[] myArray;
 
     private class Link {
 
-        private T value;
+        private final T value;
         private Link next;
 
         Link(T value) {
@@ -33,7 +30,7 @@ public class SinglyLinkedList<T> {
 
     public SinglyLinkedList() {
         this.size = 0;
-        this.myArray = (T[]) new Object[0];
+        this.head = new Link(null);
     }
 
 
@@ -44,9 +41,25 @@ public class SinglyLinkedList<T> {
      * @param value value to be appended
      */
     public void add(T value) {
-        this.myArray = Arrays.copyOf(myArray, size+1);
-        this.myArray[size]=value;
-        head = new Link(value);
+        if (size==0) {
+            this.head = new Link(value);
+        } else {
+            if (head.getNext()==null) {
+                head.setNext(new Link(value));
+            } else {
+                Link nextLink = head.getNext();
+                for (int i = 1; i < size-1; i++) {
+                    nextLink = nextLink.getNext();
+                }
+                nextLink.setNext(new Link(value));
+            }
+        }
+//        this.myArray = Arrays.copyOf(myArray, size+1);
+//        head = new Link(value);
+//        if (size>0) {
+//            myArray[size-1].setNext(head);
+//        }
+//        this.myArray[size] = head;
         this.size+=1;
     }
 
@@ -57,8 +70,16 @@ public class SinglyLinkedList<T> {
      * @return value of element at index
      */
     public T get(int index) {
-        if (index<size || index>0) {
-            return this.myArray[index];
+        if (index<size && index>=0) {
+            if (index==0) {
+                return head.getValue();
+            } else {
+                Link nextLink = head.getNext();
+                for (int i = 1; i < index; i++) {
+                    nextLink = nextLink.getNext();
+                }
+                return nextLink.getValue();
+            }
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -71,16 +92,16 @@ public class SinglyLinkedList<T> {
      * @return Index of 'number' if it's in the list, otherwise -1;
      */
     public int indexOf(T number) {
-        int index = 0;
-        for (int i = 0; i < size; i++) {
-            if (myArray[i].equals(number)) {
-                index = i;
-                break;
-            } else {
-                index = -1;
-            }
-        }
-        return index;
+//        int index = 0;
+//        for (int i = 0; i < size; i++) {
+//            if (myArray[i].getValue().equals(number)) {
+//                index = i;
+//                break;
+//            } else {
+//                index = -1;
+//            }
+//        }
+        return 0;
     }
 
     /**
@@ -90,22 +111,26 @@ public class SinglyLinkedList<T> {
      * @param number Value to be inserted.
      */
     public void insert(int index, T number) {
-        if (index>=size) {
-            add(number);
-        } else {
-            T[] copy = (T[]) new Object[size+1];
-            if (index==0) {
-                copy[0] = number;
-                System.arraycopy(myArray, 0, copy, 1, size);
-            } else {
-                System.arraycopy(myArray, 0, copy, 0, index);
-                copy[index]=number;
-                System.arraycopy(myArray, index, copy, index+1, size-1);
-            }
-            this.myArray=copy;
-            this.head = new Link(number);
-            this.size+=1;
-        }
+//        if (index==size) {
+//            add(number);
+//        } else {
+//            Link[] copy = (Link[]) new Object[size+1];
+//            if (index==0) {
+//                copy[0] = new Link(number);
+//                copy[0].setNext(myArray[0]);
+//                System.arraycopy(myArray, 0, copy, 1, size);
+//            } else {
+//                System.arraycopy(myArray, 0, copy, 0, index);
+//                Link newLink = new Link(number);
+//                copy[index] = newLink;
+//                copy[index-1].setNext(newLink);
+//                newLink.setNext(myArray[index+1]);
+//                System.arraycopy(myArray, index, copy, index+1, size-1);
+//            }
+//            this.myArray=copy;
+//            this.head = new Link(number);
+//            this.size+=1;
+//        }
     }
 
     /**

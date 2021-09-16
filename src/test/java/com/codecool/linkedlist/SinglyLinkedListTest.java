@@ -14,7 +14,7 @@ class SinglyLinkedListTest {
     SinglyLinkedList<Integer> listUnderTest;
 
     public SinglyLinkedListTest() {
-        this.listUnderTest = new SinglyLinkedList<>();
+        this.listUnderTest = new SinglyLinkedList<Integer>();
     }
 
     @Test
