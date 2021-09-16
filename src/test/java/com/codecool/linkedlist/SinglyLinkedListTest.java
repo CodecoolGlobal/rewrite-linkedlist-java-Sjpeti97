@@ -153,7 +153,7 @@ class SinglyLinkedListTest {
     @Order(12)
     void indexOf_existingElement_returnsWithItsIndex() {
         fillListWithElements();
-
+        System.out.println(listUnderTest.toString());
         assertEquals(0, listUnderTest.indexOf(123));
         assertEquals(3, listUnderTest.indexOf(456));
         assertEquals(5, listUnderTest.indexOf(678));
